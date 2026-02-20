@@ -96,3 +96,37 @@ A pagina de detalhe do pedido concentra todas as operacoes:
 
 ### Filtros Avancados em Pedidos
 A listagem de pedidos suporta filtros combinados: busca textual, filtro por status e filtro por fornecedor, todos sincronizados com a URL.
+
+## 7. Desafios de Criatividade
+
+Optei por implementar **todas as tres opcoes** (A, B e C):
+
+### Opcao A - Experiencia do usuario
+- Filtro de pedidos por status e fornecedor
+- Busca de produtos e fornecedores com debounce
+- Interface intuitiva com painel duplo para vinculos
+- Dashboard com cards de resumo e pedidos recentes
+
+### Opcao B - Regra de negocio
+- Bloqueio de pedidos para fornecedor inativo
+- Bloqueio de edicao de pedidos concluidos/cancelados
+- Historico de status com timeline visual
+
+### Opcao C - Organizacao tecnica
+- Service Layer Pattern para separacao de responsabilidades
+- Componentes Vue reutilizaveis (DataTable, Pagination, StatusBadge, etc.)
+- Composable `useFilters` para logica de filtros compartilhada
+- Enums PHP com metodos utilitarios (label, canTransitionTo, isTerminal)
+
+## 8. O que melhoraria com mais tempo
+
+- **Testes automatizados**: PHPUnit para Services e Feature Tests para Controllers; Vitest/Vue Test Utils para componentes Vue
+- **Notificacoes em tempo real**: Usar Laravel Broadcasting + WebSockets para notificar o usuario quando jobs bulk terminam de processar
+- **Exportacao de relatorios**: Exportar pedidos em PDF/Excel usando Laravel Excel
+- **Paginacao no painel de vinculos**: Atualmente carrega todos os produtos; com muitos registros, seria necessario paginar
+- **Cache de consultas**: Cache de queries frequentes (dashboard stats) usando Redis como cache driver
+- **Logs e auditoria**: Registrar todas as acoes do usuario (quem criou/editou/excluiu) com pacote como spatie/laravel-activitylog
+- **Permissoes e papeis**: Implementar RBAC com spatie/laravel-permission para controlar acesso por perfil
+- **Validacao de CNPJ**: Validar digitos verificadores do CNPJ (algoritmo modulo 11)
+- **Dark mode**: Suporte a tema escuro usando Tailwind dark variant
+- **Internacionalizacao**: Suporte multi-idioma com Laravel Localization e vue-i18n

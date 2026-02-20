@@ -9,14 +9,13 @@ const emit = defineEmits(['update:modelValue']);
 
 function formatPhone(value) {
     const digits = value.replace(/\D/g, '').slice(0, 11);
-    let formatted = digits;
-    if (digits.length > 0) formatted = '(' + digits.slice(0, 2);
-    if (digits.length > 2) formatted += ') ' + digits.slice(2);
-    if (digits.length > 7) formatted = formatted.slice(0, 10) + '-' + formatted.slice(10);
-    if (digits.length > 10) {
-        formatted = '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+    if (digits.length === 0) return '';
+    if (digits.length <= 2) return '(' + digits;
+    if (digits.length <= 6) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+    if (digits.length <= 10) {
+        return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
     }
-    return formatted;
+    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
 }
 
 function onInput(event) {
