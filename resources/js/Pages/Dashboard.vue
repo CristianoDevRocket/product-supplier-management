@@ -19,7 +19,8 @@ function formatCurrency(value) {
 
 function formatDate(date) {
     if (!date) return '-';
-    return new Date(date + 'T00:00:00').toLocaleDateString('pt-BR');
+    const d = new Date(date);
+    return d.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 }
 </script>
 
